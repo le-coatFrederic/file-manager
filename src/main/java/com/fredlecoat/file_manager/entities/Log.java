@@ -1,9 +1,9 @@
-package com.fredlecoat.file_manager.domain.entities;
+package com.fredlecoat.file_manager.entities;
 
 import java.time.LocalDateTime;
 
-import com.fredlecoat.file_manager.domain.values.LogStatus;
-import com.fredlecoat.file_manager.domain.values.LogType;
+import com.fredlecoat.file_manager.values.LogStatus;
+import com.fredlecoat.file_manager.values.LogType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,12 +43,12 @@ public class Log {
 
     @ManyToOne
     @JoinColumn(name = "file_id", nullable = false)
-    private File file;
+    private FileEntity file;
 
     public Log(
         LocalDateTime executedTime,
         LogType type,
-        File file
+        FileEntity file
     ) {
         this.executedTime = executedTime;
         this.type = type;
@@ -60,7 +60,7 @@ public class Log {
         LocalDateTime executedTime,
         LocalDateTime decisionTime,
         LogType type,
-        File file
+        FileEntity file
     ) {
         this.executedTime = executedTime;
         this.type = type;

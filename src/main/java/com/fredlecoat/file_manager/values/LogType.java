@@ -1,4 +1,4 @@
-package com.fredlecoat.file_manager.domain.values;
+package com.fredlecoat.file_manager.values;
 
 public enum LogType {
     MOVE,
