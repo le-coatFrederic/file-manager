@@ -1,6 +1,10 @@
 package com.fredlecoat.file_manager.services;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -16,8 +20,11 @@ import com.fredlecoat.file_manager.values.FileType;
 public class FileScannerService {
     private final FileEntityRepository fileRepository;
 
-    @Value("${app.input-path:/data/input}")
+    @Value("${app.paths.input:/data/input}")
     private String inputPath;
+
+    @Value("${app.paths.temp}")
+    private String tmpDir;
 
     public FileScannerService(
         FileEntityRepository fileRepository
@@ -31,7 +38,9 @@ public class FileScannerService {
             throw new IllegalAccessException("Input folder does not exists !");
         }
 
-        this.processCurrentFile(inputDir, null);
+        for (File file: inputDir.listFiles()) {
+            this.processCurrentFile(file, null);
+        }
     }
 
     private void processCurrentFile(File folder, FileEntity parentFolder) { 
@@ -55,6 +64,18 @@ public class FileScannerService {
             for (File file: folder.listFiles()) {
                 this.processCurrentFile(file, newFile);
             }
-        }   
+        } else {
+            moveToTmp(folder.toPath());
+        }
+    }
+
+    private void moveToTmp(Path file) {
+        try {
+            Path tmpPath = Path.of(this.tmpDir);
+            Path target = tmpPath.resolve(file.getFileName());
+            Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.err.println(e.getLocalizedMessage());
+        }
     }
 }

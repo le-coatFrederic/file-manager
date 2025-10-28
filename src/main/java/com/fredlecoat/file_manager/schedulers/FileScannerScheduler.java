@@ -15,7 +15,7 @@ public class FileScannerScheduler {
         this.fileScannerService = fileScannerService;
     }
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 1000000)
     public void scanInputFolder() {
         try {
             this.fileScannerService.scanInputFolder();
