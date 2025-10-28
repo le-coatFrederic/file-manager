@@ -51,7 +51,7 @@ public class FileScannerService {
             LocalDateTime.ofInstant(Instant.ofEpochMilli(folder.lastModified()), ZoneId.systemDefault())
         );
         
-        System.out.println("FileEntity " + folder.getName() + " created.");       
+        System.out.println("FileEntity " + newFile.getUri() + " created.");       
 
         if (parentFolder != null) {
             newFile.setParent_folder(parentFolder);
