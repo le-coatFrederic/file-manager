@@ -55,7 +55,9 @@ public class FileScannerService {
         System.out.println("FileEntity created.");       
 
         System.out.println("Setting parent.");  
-        newFile.setParent_folder(parentFolder != null ? parentFolder : null);
+        if (parentFolder != null) {
+            newFile.setParent_folder(parentFolder);
+        }
         System.out.println("Parent setted.");  
 
         this.fileRepository.save(newFile);
