@@ -16,7 +16,10 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
 
     volumes:
-      - ${DATA_VOLUME}:/data/input
+      - ${DATA_VOLUME_INPUT}:/data/input
+      - ${DATA_VOLUME_TMP}:/data/tmp
+      - ${DATA_VOLUME_VALIDATION}:/data/manual_review
+      - ${DATA_VOLUME_CONFIRMED}:/data/classified
       - ${CONFIG_VOLUME}:/config
     restart: unless-stopped
     networks:

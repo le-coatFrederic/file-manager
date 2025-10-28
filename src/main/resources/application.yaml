@@ -1,5 +1,10 @@
 app:
   input-path: /data/input
+  paths:
+    input: /data/input
+    temp: /data/tmp 
+    manual: /data/manual_review
+    classified: /data/classified
 
 spring:
   application:
