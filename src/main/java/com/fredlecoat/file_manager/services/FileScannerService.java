@@ -49,13 +49,13 @@ public class FileScannerService {
             folder.isDirectory() == true ? FileType.FOLDER : FileType.FILE, 
             100L,
             LocalDateTime.ofInstant(Instant.ofEpochMilli(folder.lastModified()), ZoneId.systemDefault())
-        );
-        
-        System.out.println("FileEntity " + newFile.getUri() + " created.");       
+        );       
 
         if (parentFolder != null) {
             newFile.setParent_folder(parentFolder);
         }
+        
+        System.out.println("FileEntity " + newFile.getUri() + " created.");
 
         this.fileRepository.save(newFile);
 
