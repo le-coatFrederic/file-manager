@@ -44,7 +44,6 @@ public class FileScannerService {
     }
 
     private void processCurrentFile(File folder, FileEntity parentFolder) { 
-        System.out.println("FileEntity creation.");       
         FileEntity newFile = new FileEntity(
             folder.getName(), 
             folder.isDirectory() == true ? FileType.FOLDER : FileType.FILE, 
@@ -52,13 +51,11 @@ public class FileScannerService {
             LocalDateTime.ofInstant(Instant.ofEpochMilli(folder.lastModified()), ZoneId.systemDefault())
         );
         
-        System.out.println("FileEntity created.");       
+        System.out.println("FileEntity " + folder.getName() + " created.");       
 
-        System.out.println("Setting parent.");  
         if (parentFolder != null) {
             newFile.setParent_folder(parentFolder);
         }
-        System.out.println("Parent setted.");  
 
         this.fileRepository.save(newFile);
 
