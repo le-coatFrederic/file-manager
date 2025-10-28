@@ -38,10 +38,11 @@ public class FileScannerService {
         FileEntity newFile = new FileEntity(
             folder.getName(), 
             folder.isDirectory() == true ? FileType.FOLDER : FileType.FILE, 
-            parentFolder,
             folder.getTotalSpace(),
             LocalDateTime.ofInstant(Instant.ofEpochMilli(folder.lastModified()), ZoneId.systemDefault())
         );
+
+        newFile.setParent_folder(parentFolder != null ? parentFolder : null);
 
         this.fileRepository.save(newFile);
 
