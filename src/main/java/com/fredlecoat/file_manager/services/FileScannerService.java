@@ -51,8 +51,10 @@ public class FileScannerService {
 
         this.fileRepository.save(newFile);
 
-        /*for (File file: folder.listFiles()) {
-            this.processCurrentFile(file, newFile);
-        }*/
+        if (folder.isDirectory()) {
+            for (File file: folder.listFiles()) {
+                this.processCurrentFile(file, newFile);
+            }
+        }   
     }
 }
