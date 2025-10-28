@@ -16,7 +16,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
 
     volumes:
-      - ${DATA_VOLUME}:/data
+      - ${DATA_VOLUME}:/data/input
       - ${CONFIG_VOLUME}:/config
     restart: unless-stopped
     networks:
