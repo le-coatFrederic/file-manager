@@ -79,9 +79,9 @@ public class FileEntity {
 
     public String getUri() {
         if (this.parent_folder == null) {
-            return "/" + this.name + "/";
+            return "/" + this.name;
         } else {
-            return this.parent_folder.getUri() + this.name;
+            return this.parent_folder.getUri() + "/" + this.name;
         }
     }
 }
